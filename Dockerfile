@@ -12,12 +12,11 @@ RUN curl -SL 'https://s3.amazonaws.com/downloads.mirthcorp.com/connect/3.8.1.b24
 
 RUN useradd -u 1000 mirth
 RUN mkdir -p /opt/connect/appdata && chown -R mirth:mirth /opt/connect/appdata
+RUN mkdir -p /opt/connect/secrets && chown -R mirth:mirth /opt/connect/secrets
 
 VOLUME /opt/connect/appdata
 VOLUME /opt/connect/custom-extensions
 WORKDIR /opt/connect
-RUN rm -rf cli-lib manager-lib \
-    && rm mirth-cli-launcher.jar mirth-manager-launcher.jar mccommand mcmanager
 RUN (cat mcserver.vmoptions /opt/connect/docs/mcservice-java9+.vmoptions ; echo "") > mcserver_base.vmoptions
 EXPOSE 8443
 
